@@ -1,4 +1,4 @@
-# CS411-Group-6-Project
+# CS411 Project
 
 Team Members:
 Charles Ho |
