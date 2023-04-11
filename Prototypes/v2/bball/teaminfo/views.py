@@ -52,3 +52,4 @@ def player_info(request):
 def aboutpage(request):
     return render(request, 'teaminfo/about.html')
 
+#New features coming
