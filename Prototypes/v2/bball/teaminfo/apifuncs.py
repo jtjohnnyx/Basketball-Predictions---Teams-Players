@@ -25,7 +25,7 @@ def find_player_info(dict,key):
                     'Height: ' + dict['response'][i]['height']['meters'],
                     'Affiliation: ' + dict['response'][i]['affiliation']]
             found = 1
-        else:
+        else: 
             i += 1
     if found == 1:
         return info

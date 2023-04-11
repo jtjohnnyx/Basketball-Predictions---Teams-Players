@@ -23,4 +23,5 @@ urlpatterns = [
     path('bball/', views.display),
     path('bball/team/', views.team_info),
     path('bball/player/', views.player_info),
+    path('bball/about/', views.aboutpage),
 ]

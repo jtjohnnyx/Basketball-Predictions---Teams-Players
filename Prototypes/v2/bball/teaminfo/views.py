@@ -5,15 +5,16 @@ from teaminfo.forms import PlayerForm
 from teaminfo import api
 from teaminfo import apifuncs
 
+
 def display(request):
   return render(request,
          'teaminfo/display.html',
           )
 
-def team_info(request):
+def team_info(request): 
 
   result = ''
-  if request.method == 'POST':
+  if request.method == 'POST': 
       # create an instance of our form, and fill it with the POST data
       form = TeamForm(request.POST)
 
@@ -46,3 +47,8 @@ def player_info(request):
   return render(request,
          'teaminfo/nameform.html',
          {'form': form, 'result': result, 'id': 2})
+
+
+def aboutpage(request):
+    return render(request, 'teaminfo/about.html')
+
