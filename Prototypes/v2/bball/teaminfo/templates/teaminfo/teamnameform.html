@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'teaminfo/styles.css' %}">
 </head>
 <body>
-    
   <div class="banner">
     <h3><a href="/bball/">Home</a></h3>
     <h3><a href="/bball/team/">Team Stats</a></h3>
@@ -20,13 +19,25 @@
 
   <button class="goback-btn"><a href="/bball/">Go back</a></button>
 
+
   <div class="form-container">
-
-    <header>This is the about page</header>
- 
+    <h3>Enter the full team name below:</h3>
+  
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button class="form-btn" type="submit">Submit</button>
+    </form>
+  
+    <ul class="form-result">
+        {% for r in result %}
+          <li>{{ r }}</li>
+        {% endfor %} 
+    </ul>
   </div>
-  
-
-  
 
 
+</body>
+</html>

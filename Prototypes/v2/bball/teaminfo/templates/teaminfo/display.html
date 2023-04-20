@@ -1,3 +1,46 @@
-<h3><a href="/bball/team/">Get Team info</a></h3>
-<h3><a href="/bball/player/">Get Player info</a></h3>
-<h3><a href="/bball/about/">Go to about page</a></h3>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basketball Project</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'teaminfo/display.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'teaminfo/styles.css' %}">
+</head>
+<body>
+    <div class="banner">
+        <h3><a href="/bball/">Home</a></h3>
+        <h3><a href="/bball/team/">Team Stats</a></h3>
+        <h3><a href="/bball/player/">Player Stats</a></h3>
+        <h3><a href="/bball/about/">About</a></h3>
+    </div>
+    <h1>Live Games</h1>
+
+    {% if result.live %}
+      <ul>
+        {% for game in result.live %}
+          <li>{{ game.home_team }} vs. {{ game.visitor_team }} - {{ game.home_score }}-{{ game.visitor_score }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No live games at the moment.</p>
+    {% endif %}
+
+    <h1>Upcoming Games</h1>
+
+    {% if result.upcoming %}
+      <ul>
+        {% for game in result.upcoming %}
+          <li>{{ game.home_team }} vs. {{ game.visitor_team }} - {{ game.game_date }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No upcoming games in the next week.</p>
+    {% endif %}
+
+</body>
+</html>
+
+

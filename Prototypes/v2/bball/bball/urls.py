@@ -23,5 +23,6 @@ urlpatterns = [
     path('bball/', views.display),
     path('bball/team/', views.team_info),
     path('bball/player/', views.player_info),
+    path('bball/live_scores/', views.live_scores),
     path('bball/about/', views.aboutpage),
 ]
