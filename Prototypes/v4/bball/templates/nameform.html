@@ -1,0 +1,21 @@
+{% if id == 1 %}
+<h3><a href="/bball/player/">Get Player info</a></h3>
+{% elif id == 2 %}
+<h3><a href="/bball/team/">Get Team info</a></h3>
+{% endif %}
+<h3><a href="/bball/">Go back</a></h3>
+<!-- <h3><a href="/bball/odds/">Go find out love odds</a></h3> -->
+
+<h3>Enter the full name below:</h3>
+
+<form action="" method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+<ul>
+    {% for r in result %}
+      <li>{{ r }}</li>
+    {% endfor %} 
+</ul>
