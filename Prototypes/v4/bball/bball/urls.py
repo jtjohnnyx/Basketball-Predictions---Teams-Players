@@ -11,8 +11,11 @@ urlpatterns = [
     path('bball/team/', views.team_info),
     path('bball/player/', views.player_info),
     path('bball/about/', views.aboutpage),
-    path('bball/odds/', views.odds),
+    path('bball/games/', views.games),
     path('', TemplateView.as_view(template_name="index.html")),
     path('accounts/', include('allauth.urls')),
+    #path('/accounts/google/login/', ) 
     path('logout/', LogoutView.as_view()),
+    #path('bball/compare/', views.compare),
+    path('bball/compare/<int:id>/', views.compare, name = 'comparison'),
 ]

@@ -1,4 +1,5 @@
 #import datetime
+
 from .models import Teamcache, Gamecache, Comcache
 import ast
 
@@ -17,22 +18,31 @@ def get_teamcache(name):
     else:
         return team
     
-def get_gamecache():
+'''def get_gamecache():
+    Gamecache.objects.all().delete()
     if Gamecache.objects.exists() == False:
         return None
     else:
+        games = Gamecache.objects.all()
+        #print(type(infos.info))
         ls = []
-        infos = Gamecache.objects.all()
-        for i in infos:
-            ls += [i.info]
-        return 
+        for game in games:
+            ls += [[game.time, game.home, game.away]]
+        return ls'''
 
+def is_gamecache():
+    #Gamecache.objects.all().delete()
+    return Gamecache.objects.exists()
+    
 def cache_team(name,result):
     Teamcache.objects.create(name = name, nick = result[0], code = result[1], city = result[2])
     return
 
-def cache_livegames(ls):
-    Gamecache.objects.create(info = ls)
+def cache_games(result):
+    i = 0
+    for res in result:
+        Gamecache.objects.create(time = res[0], home = res[1], away = res[2], id2 = i)
+        i += 1
     return
 
 def cache_compare(name1, name2, stats1, stats2):

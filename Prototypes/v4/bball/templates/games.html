@@ -1,0 +1,23 @@
+<h1>Upcoming Games</h1>
+<h3><a href="/bball/">Get Back to home page</a></h3>
+
+
+<!--<ul>
+    {% for o in output %}
+      <li>{{ o }}</li>
+    {% for o2 in o %}
+        <li>{{o2}}</li>
+    {% endfor %} 
+    {% endfor %}
+</ul>-->
+
+
+<ul>
+    {% for game in games %}
+        <li>Time: {{ game.time }}</li>
+        <li>Home Team: {{ game.home }}</li>
+        <li>Away team: {{ game.away }}</li>
+    <h4><a href="{% url 'comparison' game.id2 %}">Compare</a></h4>
+    <p> &nbsp;&nbsp;</p>
+    {% endfor %}
+</ul>

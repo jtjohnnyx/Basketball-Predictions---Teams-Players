@@ -9,7 +9,10 @@ class Teamcache(models.Model):
     city = models.fields.CharField(max_length=100)
 
 class Gamecache(models.Model):
-    info = models.fields.CharField(max_length=2500)
+    time = models.fields.CharField(max_length=100)
+    home = models.fields.CharField(max_length=100)
+    away = models.fields.CharField(max_length=100)
+    id2 = models.fields.IntegerField()
 
 class Comcache(models.Model):
     name1 = models.fields.CharField(max_length=100)

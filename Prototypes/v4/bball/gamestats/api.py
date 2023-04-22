@@ -14,7 +14,7 @@ def getdata(b,q):
     return bdata
 
 
-def getodds():
+def getgames():
 
     url = "https://odds.p.rapidapi.com/v4/sports/basketball/odds"
 
@@ -27,8 +27,9 @@ def getodds():
 
     response = requests.request("GET", url, headers=headers, params=querystring)
 
-
-
     data = response.json()
     
     return data
+
+def getcomparison():
+    return

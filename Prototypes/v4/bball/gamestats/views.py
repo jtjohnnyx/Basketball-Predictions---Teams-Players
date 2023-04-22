@@ -5,6 +5,7 @@ from gamestats.forms import PlayerForm
 from gamestats import api
 from gamestats import apifuncs
 from gamestats import cache
+from .models import Gamecache
 
 def display(request):
   return render(request,
@@ -60,20 +61,28 @@ def aboutpage(request):
     return render(request, 'about.html')
 
 
-def odds(request):  
+def games(request):  
 
-  stats = cache.get_gamecache()
-  print(stats)
-  if stats == None:
+  avail = cache.is_gamecache()
+  print(avail)
+  if avail == False:
     print("add to cache")
-    info = api.getodds()
-    cache.cache_livegames(info)
-    result = apifuncs.find_odds_info(info)
+    info = api.getgames()
+    result = apifuncs.find_games(info)
+    cache.cache_games(result)
   else:
     print("get from cache")
-    result = stats
-  print(result)
+  games = Gamecache.objects.all()
+    #result = stats
 
-  return render(request, 'odds.html', {'output' : result})
+  return render(request, 'games.html', {'games': games})#, {'output' : result})
+
+def compare(request, id):
+   games = Gamecache.objects.all()
+   for game in games:
+      if game.id2 == id:
+        gg = game
+   return render(request, 'comparison.html', {'id' : id, 'game': gg})
+
 
 #New features coming

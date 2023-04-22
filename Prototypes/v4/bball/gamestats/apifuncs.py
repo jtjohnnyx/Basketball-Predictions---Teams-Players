@@ -33,7 +33,7 @@ def find_player_info(dict,key):
         return [None]
     
 
-def find_odds_info(list):
+def find_games(list):
     i = 0
     output = []
     while(i < len(list)):
@@ -43,13 +43,10 @@ def find_odds_info(list):
     
     info = []
     for item in output:
-        info.append(['Time:'+ item['commence_time'],
-                    'Home Team: ', item['home_team'],
-                    'Away Team: ', item['away_team'],
-                    'Moneyline: '+ item['bookmakers'][0]['markets'][0]['outcomes'][0]['name'], item['bookmakers'][0]['markets'][0]['outcomes'][0]['price'],
-                    'Moneyline: '+ item['bookmakers'][0]['markets'][0]['outcomes'][1]['name'], item['bookmakers'][0]['markets'][0]['outcomes'][1]['price']],
-                    
-                    )
+        date = item['commence_time'].replace('Z','')
+        info.append([' '.join(date.split("T")) + 'UTC',
+                    item['home_team'],
+                    item['away_team']])
         
 
     return info
