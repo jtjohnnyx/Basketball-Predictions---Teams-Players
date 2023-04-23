@@ -1,6 +1,10 @@
-<h3><a href="/logout/">Logout bro</a></h3>
+{% load socialaccount %}
+{% if user.is_authenticated %}
+    <h3><a href="/logout/">Logout bro</a></h3>
+{% else %}
+    <h3><a href="/">Login bro</a></h3>
+{% endif %}
 <p> &nbsp;&nbsp;</p>
-
 
 <h3><a href="/bball/team/">Get Team info</a></h3>
 <h3><a href="/bball/player/">Get Player info</a></h3>

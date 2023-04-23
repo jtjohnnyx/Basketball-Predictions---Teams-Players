@@ -31,5 +31,34 @@ def getgames():
     
     return data
 
-def getcomparison():
-    return
+
+def getteams():
+
+    url = "https://api-basketball-nba.p.rapidapi.com/nbateamlist"
+
+    headers = {
+        "X-RapidAPI-Key": "1140719bf0mshb79f4957c134d32p181b91jsna45ef7333ea5",
+        "X-RapidAPI-Host": "api-basketball-nba.p.rapidapi.com"
+    }
+
+    response = requests.request("GET", url, headers=headers)
+
+    data = response.json()
+    return data
+
+
+def getteaminfo(teamid):
+
+    url = "https://api-basketball-nba.p.rapidapi.com/nbateaminfo"
+
+    querystring = teamid
+
+    headers = {
+        "X-RapidAPI-Key": "1140719bf0mshb79f4957c134d32p181b91jsna45ef7333ea5",
+        "X-RapidAPI-Host": "api-basketball-nba.p.rapidapi.com"
+    }
+
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    data = response.json()
+
+    return data

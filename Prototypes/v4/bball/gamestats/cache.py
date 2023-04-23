@@ -1,7 +1,8 @@
 #import datetime
 
-from .models import Teamcache, Gamecache, Comcache
+from .models import Teamcache, Gamecache
 import ast
+from gamestats import datefuncs, api, apifuncs
 
 #print(datetime.datetime.now().time())
 
@@ -12,11 +13,9 @@ import ast
 #    Team.objects.create(name = stud_name[i], nick = stud_age[i], code = stud_marks[i], city = )
 
 def get_teamcache(name):
+    #Teamcache.objects.all().delete()
     team = Teamcache.objects.filter(name = name).first()
-    if team:
-        return [team.nick, team.code, team.city]
-    else:
-        return team
+    return team
     
 '''def get_gamecache():
     Gamecache.objects.all().delete()
@@ -32,11 +31,36 @@ def get_teamcache(name):
 
 def is_gamecache():
     #Gamecache.objects.all().delete()
+    '''
+    date = LastUpdate.objects.first()
+    a_date, upd = datefuncs.is_next_day(date)
+    if upd == True:
+        LastUpdate.objects.all().delete()
+        LastUpdate.objects.create(hour = a_date[0], day = a_date[1], month = a_date[2], year = a_date[3])'''
+    if datefuncs.needupdate() == True:
+        datefuncs.update()
+        Gamecache.objects.all().delete()
+    #LastUpdate.objects.all().delete()
+    #LastUpdate.objects.create(hour = "16", day = "21", month = "04", year = "2023")
+    print("Need update?:", datefuncs.needupdate())
     return Gamecache.objects.exists()
     
-def cache_team(name,result):
-    Teamcache.objects.create(name = name, nick = result[0], code = result[1], city = result[2])
-    return
+'''def cache_team(result):
+    Teamcache.objects.create(name = result[5], nick = result[0], code = result[1], city = result[2],
+                             teamid = result[3], record = result[4])
+    return'''
+
+def cache_team(name):
+    res = False
+    dict = api.getteams()
+    teamid = apifuncs.find_team_id(dict, name)
+    if teamid != None:
+        dict2 = api.getteaminfo(teamid)
+        result = apifuncs.find_team_info(dict2)
+        Teamcache.objects.create(name = result[5], nick = result[0], code = result[1], city = result[2],
+                             teamid = result[3], record = result[4])
+        res = True
+    return res
 
 def cache_games(result):
     i = 0
@@ -45,6 +69,3 @@ def cache_games(result):
         i += 1
     return
 
-def cache_compare(name1, name2, stats1, stats2):
-    Comcache.objects.create(name1 = name1, name2 = name2, stats1 = stats1, stats2 = stats2)
-    return

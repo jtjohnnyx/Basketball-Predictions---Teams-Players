@@ -15,7 +15,14 @@
 </form>
 
 <ul>
-    {% for r in result %}
-      <li>{{ r }}</li>
-    {% endfor %} 
+    {% if team != None %}
+      <li>Name: {{ team.name }}</li>
+      <li>Nickname: {{ team.nick }}</li>
+      <li>Abbreviation: {{ team.code }}</li>
+      <li>City: {{ team.city }}</li>
+      <li>Season record: {{ team.record }}</li>
+    {% elif found == 0 %}
+      <h4>No team found</h4>
+    {% endif %}
 </ul>
+

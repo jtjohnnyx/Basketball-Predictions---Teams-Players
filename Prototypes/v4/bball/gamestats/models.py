@@ -7,6 +7,9 @@ class Teamcache(models.Model):
     nick = models.fields.CharField(max_length=100)
     code = models.fields.CharField(max_length=100)
     city = models.fields.CharField(max_length=100)
+    teamid = models.fields.IntegerField()
+    record = models.fields.CharField(max_length=1000)
+
 
 class Gamecache(models.Model):
     time = models.fields.CharField(max_length=100)
@@ -14,8 +17,9 @@ class Gamecache(models.Model):
     away = models.fields.CharField(max_length=100)
     id2 = models.fields.IntegerField()
 
-class Comcache(models.Model):
-    name1 = models.fields.CharField(max_length=100)
-    name2 = models.fields.CharField(max_length=100)
-    stats1 = models.fields.CharField(max_length=1000)
-    stats2 = models.fields.CharField(max_length=1000)
+
+class LastUpdate(models.Model):
+    hour = models.fields.CharField(max_length=10)
+    day = models.fields.CharField(max_length=10)
+    month = models.fields.CharField(max_length=10)
+    year = models.fields.CharField(max_length=10)

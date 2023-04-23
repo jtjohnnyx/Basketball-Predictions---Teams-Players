@@ -1,4 +1,4 @@
-def find_team_info(dict,key):
+'''def find_team_info(dict,key):
     found = 0
     i = 0
     while (found != 1 and i < 63):
@@ -12,7 +12,30 @@ def find_team_info(dict,key):
     if found == 1:
         return info
     else:
-        return [None]
+        return [None]'''
+
+def find_team_id(dict, name):
+    found = 0
+    i = 0
+    while (found != 1 and i < len(dict['sports'][0]['leagues'][0]['teams'])):
+        if dict['sports'][0]['leagues'][0]['teams'][i]['team']['displayName'] == name:
+            teamid = dict['sports'][0]['leagues'][0]['teams'][i]['team']['id']
+            found = 1
+        else:
+            i += 1
+    if found == 1:
+        return {"teamid": teamid}
+    else:
+        return None
+
+def find_team_info(dict):
+    ls = [dict['team']['name'],
+          dict['team']['abbreviation'],
+          dict['team']['location'],
+          dict['team']['id'],
+          dict['team']['record']['items'][0]['summary'],
+          dict['team']['displayName']]
+    return ls
     
 def find_player_info(dict,key):
     found = 0
@@ -50,3 +73,6 @@ def find_games(list):
         
 
     return info
+
+def find_all_teams(dict):
+    return
