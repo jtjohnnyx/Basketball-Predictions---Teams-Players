@@ -1,0 +1,14 @@
+<h1>Past Games</h1>
+
+<h3><a href="/bball/">Get Back to home page</a></h3>
+
+
+<ul>
+    {% for game in games %}
+        <li>Time: {{ game.time }}</li>
+        <li>Home Team: {{ game.home }}</li>
+        <li>Away team: {{ game.away }}</li>
+        <li><h4>{{ game.home }} : {{ game.homescore }}-{{ game.awayscore }} : {{ game.away }}</h4></li>
+        <p> &nbsp;&nbsp;</p>
+    {% endfor %}
+</ul>

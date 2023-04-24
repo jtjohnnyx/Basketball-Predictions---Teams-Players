@@ -1,0 +1,16 @@
+<h1>Upcoming Games</h1>
+
+<h3><a href="/bball/">Get Back to home page</a></h3>
+
+
+<ul>
+    {% for game in games %}
+        <li>Time: {{ game.time }}</li>
+        <li>Home Team: {{ game.home }}</li>
+        <li>Away team: {{ game.away }}</li>
+       <!--<li>Home: {{ game.homescore }}</li>
+        <li>Away: {{ game.awayscore }}</li>-->
+        <h4><a href="{% url 'comparison' game.gameid %}">Compare above</a></h4>
+        <p> &nbsp;&nbsp;</p>
+    {% endfor %}
+</ul>

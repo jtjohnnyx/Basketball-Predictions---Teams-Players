@@ -1,0 +1,12 @@
+{% load socialaccount %}
+<html>
+<body>
+<h1>Basketball Predictions</h1>
+{% if user.is_authenticated %}
+  <p>Welcome, You are logged in as {{ user.username }}</p>
+  <h3><a href="/bball/">Continue</a></h3>
+{% else %}
+  <a href="{% provider_login_url 'google' %}">Login</a>
+{% endif %}
+</body>
+</html>
