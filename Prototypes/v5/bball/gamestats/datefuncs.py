@@ -36,5 +36,15 @@ def needupdate(type):
         upd = True
 
     return upd
+
+'''
+def calculateAge(birthDate):
+    today = datetime.datetime.now()
+    age = today.year - birthDate.year -((today.month, today.day) < (birthDate.month, birthDate.day))'''
     
-    
+def calculate_age(birthdate):
+    """Calculate age based on birthdate."""
+    today = datetime.date.today()
+    birthdate = datetime.datetime.strptime(birthdate, "%m/%d/%Y").date()
+    age = today.year - birthdate.year - ((today.month, today.day) < (birthdate.month, birthdate.day))
+    return age

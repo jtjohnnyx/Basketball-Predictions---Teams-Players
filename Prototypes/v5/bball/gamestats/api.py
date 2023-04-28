@@ -1,20 +1,5 @@
 import requests
 
-'''
-#deprecated
-def getdata(b,q):
-    url = "https://api-nba-v1.p.rapidapi.com/" + b
-
-    headers = {
-	"X-RapidAPI-Key": "1140719bf0mshb79f4957c134d32p181b91jsna45ef7333ea5",
-	"X-RapidAPI-Host": "api-nba-v1.p.rapidapi.com"
-    }
-
-    response = requests.request("GET", url, headers=headers, params=q)
-
-    bdata = response.json()
-    return bdata'''
-
 
 def getgames():
 
@@ -64,7 +49,7 @@ def getteaminfo(teamid):
     response = requests.request("GET", url, headers=headers, params=querystring)
     data = response.json()
 
-    return data'''
+    return data
 
 
 def getteamstats(q):
@@ -77,6 +62,42 @@ def getteamstats(q):
 	"content-type": "application/octet-stream",
 	"X-RapidAPI-Key": "1140719bf0mshb79f4957c134d32p181b91jsna45ef7333ea5",
 	"X-RapidAPI-Host": "nba-team-stats.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+
+    data = response.json()
+
+    return data'''
+
+def getteamstats(q):
+
+    url = "https://nba-team-stats.p.rapidapi.com/teamStats"
+
+    querystring = q
+
+    headers = {
+	"content-type": "application/octet-stream",
+	"X-RapidAPI-Key": "ddbdea0dd2msh35b83215516e554p167640jsn0792654add12",
+	"X-RapidAPI-Host": "nba-team-stats.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+
+    data = response.json()
+
+    return data
+
+
+def getcurrteams():
+
+    url = "https://tank01-fantasy-stats.p.rapidapi.com/getNBATeams"
+
+    querystring = {"schedules":"false","rosters":"true"}
+
+    headers = {
+        "X-RapidAPI-Key": "1140719bf0mshb79f4957c134d32p181b91jsna45ef7333ea5",
+        "X-RapidAPI-Host": "tank01-fantasy-stats.p.rapidapi.com"
     }
 
     response = requests.get(url, headers=headers, params=querystring)

@@ -1,0 +1,31 @@
+{% if pageid == 1 %}
+<h3><a href="/bball/player/">Get Player info</a></h3>
+{% elif pageid == 2 %}
+<h3><a href="/bball/team/">Get Team info</a></h3>
+{% endif %}
+<h3><a href="/bball/">Go back</a></h3>
+<!-- <h3><a href="/bball/odds/">Go find out love odds</a></h3> -->
+
+<h3>Select the player below:</h3>
+<h4>**For current season only**</h4>
+
+<form action="" method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+<ul>
+    {% if player != None %}
+      <li>Name: {{ player.name }}</li>
+      <li>Team: {{ team.name }} {{ team.season }} Season</li>
+      <li>Age: {{ player.age }}</li>
+      <li>Height: {{ player.height }}</li>
+      <p> &nbsp;&nbsp;</p>
+      <img src = "{{ player.pic }}" width="218" height="218" style ="border: 5px solid black">
+      
+    {% endif %}
+    {% if found == False %}
+      <h3> No information available for this player.</h3>
+    {% endif %}
+</ul>

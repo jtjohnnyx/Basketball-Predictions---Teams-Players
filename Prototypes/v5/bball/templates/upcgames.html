@@ -10,7 +10,8 @@
         <li>Away team: {{ game.away }}</li>
        <!--<li>Home: {{ game.homescore }}</li>
         <li>Away: {{ game.awayscore }}</li>-->
-        <h4><a href="{% url 'comparison' game.gameid %}">Compare above</a></h4>
-        <p> &nbsp;&nbsp;</p>
+        <h4><a href="{% url 'comparison' game.gameid %}">Compare</a></h4>
+        <hr>
+        <p>&nbsp;</p>
     {% endfor %}
 </ul>

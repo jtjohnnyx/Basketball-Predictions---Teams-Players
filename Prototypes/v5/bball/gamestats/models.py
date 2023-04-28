@@ -2,13 +2,26 @@ from django.db import models
 
 # Create your models here.
 
-class Teamcache(models.Model):
+class Teams(models.Model):
     name = models.fields.CharField(max_length=100)
-    teamid = models.fields.IntegerField()
+    teamid = models.fields.CharField(max_length=10, default = "0")
     season = models.fields.CharField(max_length=10)
-    ast = models.fields.CharField(max_length=10)
-    orb = models.fields.CharField(max_length=10)
-    ftd = models.fields.CharField(max_length=10)
+    wins = models.fields.CharField(max_length=10)
+    losses = models.fields.CharField(max_length=10)
+    pts = models.fields.CharField(max_length=10)
+    opts = models.fields.CharField(max_length=10, default = "0")
+    conf = models.fields.CharField(max_length=100, default = "0")
+
+
+class Players(models.Model):
+    name = models.fields.CharField(max_length=100)
+    teamid = models.fields.CharField(max_length=10)
+    pic = models.fields.CharField(max_length=100)
+    age = models.fields.CharField(max_length=10)
+    height = models.fields.CharField(max_length=10)
+    playerid = models.fields.CharField(max_length=100)
+    extra = models.fields.CharField(max_length=1000, default = "None")
+
 
 class upcGames(models.Model):
     time = models.fields.CharField(max_length=100)

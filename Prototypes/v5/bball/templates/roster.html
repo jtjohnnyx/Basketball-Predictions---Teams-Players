@@ -1,0 +1,8 @@
+<body style="background-color:white;">
+<h3><a href="/bball/team/" style = "color:default">Go Back</a></h3>
+{% for player in players %}
+    <a href="{% url 'player' team.teamid player.playerid %}">
+    <img src="{{ player.pic }}" alt = "{{ player.name }}" width="218" height="218" style ="border: 5px solid black">
+    </a>
+{% endfor %}
+</body>

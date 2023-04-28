@@ -2,7 +2,8 @@ from django import forms
 from gamestats import cache
 
 teams = cache.get_teamlist()
-years = [(str(y),str(y)) for y in range(2005,2023)]
+years = [(str(y),str(y)) for y in range(2022, 2020, -1)]
+years = [("2023","2023(current)")] + years
 
 class TeamForm(forms.Form):
    Team_Name = forms.CharField(required=True, widget=forms.Select(choices=teams))
@@ -12,4 +13,4 @@ class TeamForm(forms.Form):
    #integer = forms.IntegerField(max_value=10000, min_value=-10000)
 
 class PlayerForm(forms.Form):
-   Player_name = forms.CharField(required=True)
+   Player_Name = forms.CharField(required=True)

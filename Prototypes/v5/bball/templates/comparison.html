@@ -1,29 +1,136 @@
+{% load convstr %}
+
 <h3><a href="/bball/upcoming-games/">Go back</a></h3>
 <p> &nbsp;&nbsp;</p>
 
 <!--NOT FINISHED!!!!</table>-->
 
-<h2>2022 Season</h2>
 
+{% if pteam1 != None and pteam2 != None %}
 <table border = "1" cellpadding = "5" cellspacing = "5" width = "600" height = "150">
+    <caption><h3>Previous Season</h3></caption>
+    <tr>
+       <th></th>
+       <th>{{pteam1.name}}</th>
+       <th>{{pteam2.name}}</th>
+    </tr>
+    <tr>
+        <th>Wins</td>
+        {% if pteam1.wins|conv > pteam2.wins|conv %}
+            <td bgcolor = #90EE90>{{pteam1.wins}}</td>
+            <td>{{pteam2.wins}}</td>
+        {% elif pteam1.wins|conv == pteam2.wins|conv %}
+            <td bgcolor = #F1EB9C>{{pteam1.wins}}</td>
+            <td bgcolor = #F1EB9C>{{pteam2.wins}}</td>
+        {% else %}
+            <td>{{pteam1.wins}}</td>
+            <td bgcolor = #90EE90>{{pteam2.wins}}</td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>Losses</td>
+        {% if pteam1.losses < pteam2.losses %}
+            <td bgcolor = #90EE90>{{pteam1.losses}}</td>
+            <td>{{pteam2.losses}}</td>
+        {% elif pteam1.losses == pteam2.losses %}
+            <td bgcolor = #F1EB9C>{{pteam1.losses}}</td>
+            <td bgcolor = #F1EB9C>{{pteam2.losses}}</td>
+        {% else %}
+            <td>{{pteam1.losses}}</td>
+            <td bgcolor = #90EE90>{{pteam2.losses}}</td>
+        {% endif %}
+    </tr>
+    <tr>
+        <th>PTS</td>
+        {% if pteam1.pts > pteam2.pts %}
+            <td bgcolor = #90EE90>{{pteam1.pts}}</td>
+            <td>{{pteam2.pts}}</td>
+        {% elif pteam1.pts == pteam2.pts %}
+            <td bgcolor = #F1EB9C>{{pteam1.pts}}</td>
+            <td bgcolor = #F1EB9C>{{pteam2.pts}}</td>
+        {% else %}
+            <td>{{pteam1.pts}}</td>
+            <td bgcolor = #90EE90>{{pteam2.pts}}</td>
+        {% endif %}
+     </tr>
+     <tr>
+        <th>OPTS</td>
+        {% if pteam1.opts < pteam2.opts %}
+            <td bgcolor = #90EE90>{{pteam1.opts}}</td>
+            <td>{{pteam2.opts}}</td>
+        {% elif pteam1.opts == pteam2.opts %}
+            <td bgcolor = #F1EB9C>{{pteam1.opts}}</td>
+            <td bgcolor = #F1EB9C>{{pteam2.opts}}</td>
+        {% else %}
+            <td>{{pteam1.opts}}</td>
+            <td bgcolor = #90EE90>{{pteam2.opts}}</td>
+        {% endif %}
+     </tr>
+</table>
+{% endif %}
+<p> &nbsp;&nbsp;</p>
+
+{% if team1 != None and team2 != None %}
+<table border = "1" cellpadding = "5" cellspacing = "5" width = "600" height = "150">
+    <caption><h3>2023 Season</h3></caption>
     <tr>
        <th></th>
        <th>{{team1.name}}</th>
        <th>{{team2.name}}</th>
     </tr>
     <tr>
-        <th>AST</td>
-        <td bgcolor = #90EE90>5000</td>
-        <td>1000</td>
+        <th>Wins</td>
+        {% if team1.wins > team2.wins %}
+            <td bgcolor = #90EE90>{{team1.wins}}</td>
+            <td>{{team2.wins}}</td>
+        {% elif team1.wins == team2.wins %}
+            <td bgcolor = #F1EB9C>{{team1.wins}}</td>
+            <td bgcolor = #F1EB9C>{{team2.wins}}</td>
+        {% else %}
+            <td>{{team1.wins}}</td>
+            <td bgcolor = #90EE90>{{team2.wins}}</td>
+        {% endif %}
     </tr>
     <tr>
-        <th>ORB</td>
-        <td bgcolor = #90EE90>7000</td>
-        <td>5000</td>
+        <th>Losses</td>
+        {% if team1.losses < team2.losses %}
+            <td bgcolor = #90EE90>{{team1.losses}}</td>
+            <td>{{team2.losses}}</td>
+        {% elif team1.losses == team2.losses %}
+            <td bgcolor = #F1EB9C>{{team1.losses}}</td>
+            <td bgcolor = #F1EB9C>{{team2.losses}}</td>
+        {% else %}
+            <td>{{team1.losses}}</td>
+            <td bgcolor = #90EE90>{{team2.losses}}</td>
+        {% endif %}
     </tr>
     <tr>
-        <th>FTD</td>
-        <td>2300</td>
-        <td bgcolor = #90EE90>8000</td>
+        <th>PTS</td>
+        {% if team1.pts > team2.pts %}
+            <td bgcolor = #90EE90>{{team1.pts}}</td>
+            <td>{{team2.pts}}</td>
+        {% elif team1.pts == team2.pts %}
+            <td bgcolor = #F1EB9C>{{team1.pts}}</td>
+            <td bgcolor = #F1EB9C>{{team2.pts}}</td>
+        {% else %}
+            <td>{{team1.pts}}</td>
+            <td bgcolor = #90EE90>{{team2.pts}}</td>
+        {% endif %}
+     </tr>
+     <tr>
+        <th>OPTS</td>
+        {% if team1.opts < team2.opts %}
+            <td bgcolor = #90EE90>{{team1.opts}}</td>
+            <td>{{team2.opts}}</td>
+        {% elif team1.opts == team2.opts %}
+            <td bgcolor = #F1EB9C>{{team1.opts}}</td>
+            <td bgcolor = #F1EB9C>{{team2.opts}}</td>
+        {% else %}
+            <td>{{team1.opts}}</td>
+            <td bgcolor = #90EE90>{{team2.opts}}</td>
+        {% endif %}
      </tr>
  </table>
+ {% endif %}
+
+ 

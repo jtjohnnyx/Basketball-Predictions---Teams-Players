@@ -64,6 +64,7 @@ def find_upcgames(list):
             #games += [[list[i]['home_team'], list[i]['away_team'], list[i]['commence_time'], int(list[i]['scores'][0]['score']), int(list[i]['scores'][1]['score'])]]
     return games
 
+
 def find_pastgames(list):
     games = []
     for i in range(len(list)):
@@ -71,9 +72,25 @@ def find_pastgames(list):
             games += [[list[i]['home_team'], list[i]['away_team'], list[i]['commence_time'], int(list[i]['scores'][0]['score']), int(list[i]['scores'][1]['score'])]]
     return games
 
-def find_all_teams(dict):
+
+def find_past_teams(dict):
     teams = []
     for team in dict['stats']:
-        teams += [[team, dict['stats'][team]['Per Game']["AST"], dict['stats'][team]['Per Game']["ORB"], dict['stats'][team]['Per Game']["FT%"]]]
+        teams += [[team, dict['stats'][team]['Per Game']["AST"], dict['stats'][team]['Per Game']["ORB"], dict['stats'][team]['Per Game']["FT%"], dict['stats'][team]['Advanced']['W'], dict['stats'][team]['Advanced']['L'], dict['stats'][team]['Per Game']["PTS"], dict['stats'][team]['Per Game Opponent']["PTS"]]]
 
     return teams
+
+
+def find_curr_teams(dict):
+    teams = []
+    for team in dict['body']:
+        teams += [[team['teamCity'] + ' ' + team['teamName'], team['ppg'], team['teamID'], team['wins'], team['loss'], team['conference'], team['oppg']]]
+
+    return teams
+
+def find_all_players(dict, index):
+    players = []
+    for player in dict['body'][index]['Roster']:
+        players += [[dict['body'][index]['Roster'][player]['longName'], dict['body'][index]['Roster'][player]['teamID'], dict['body'][index]['Roster'][player]['nbaComHeadshot'], dict['body'][index]['Roster'][player]['playerID'], dict['body'][index]['Roster'][player]['bDay'], dict['body'][index]['Roster'][player]['height']]]
+    
+    return players

@@ -1,12 +1,13 @@
-{% if id == 1 %}
+{% if pageid == 1 %}
 <h3><a href="/bball/player/">Get Player info</a></h3>
-{% elif id == 2 %}
+{% elif pageid == 2 %}
 <h3><a href="/bball/team/">Get Team info</a></h3>
 {% endif %}
 <h3><a href="/bball/">Go back</a></h3>
 <!-- <h3><a href="/bball/odds/">Go find out love odds</a></h3> -->
 
 <h3>Select the team and season below:</h3>
+<h4>**Roster only available for current season**</h4>
 
 <form action="" method="post" novalidate>
     {% csrf_token %}
@@ -18,13 +19,18 @@
     {% if team != None %}
       <li>Season: {{ year }}</li>
       <li>Team: {{ team.name }}</li>
-      <h4> Average game stats:</h4>
-      <li>AST: {{ team.ast }}</li>
-      <li>ORB: {{ team.orb }}</li>
-      <li>FTD: {{ team.ftd }}</li>
+      <li>Conference: {{ team.conf }}</li>
+      <li>Wins: {{ team.wins }}</li>
+      <li>Losses: {{ team.losses }}</li>
+      <h4>Average game stats:</h4>
+      <li>Points: {{ team.pts }}</li>
+      <li>Opponent Points: {{ team.opts }}</li>
+
+      {% if team.season == "2023" %}
+        <h4><a href="{% url 'roster' team.teamid %}">Roster</a></h4>
+      {% endif %}
     {% endif %}
     {% if found == False %}
       <h3> No information available for this season.</h3>
     {% endif %}
 </ul>
-

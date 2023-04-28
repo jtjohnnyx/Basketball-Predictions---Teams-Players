@@ -1,0 +1,9 @@
+<h3><a href="{% url 'roster' team.teamid %}">Go back</a></h3>
+<p> &nbsp;&nbsp;</p>
+
+<li>Name: {{ player.name }}</li>
+<li>Team: {{ team.name }} {{ team.season }} Season</li>
+<li>Age: {{ player.age }}</li>
+<li>Height: {{ player.height }}</li>
+<p> &nbsp;&nbsp;</p>
+<img src = {{ player.pic }} width="218" height="218" style ="border: 5px solid black">
