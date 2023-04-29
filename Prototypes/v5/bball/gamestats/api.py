@@ -1,6 +1,6 @@
 import requests
 
-
+'''
 def getgames():
 
     url = "https://odds.p.rapidapi.com/v4/sports/basketball_nba/scores"
@@ -16,6 +16,24 @@ def getgames():
 
     data = response.json()
     
+    return data'''
+
+def getgames(b,q):
+    url = "https://odds.p.rapidapi.com/v4/sports/basketball_nba/" + b
+
+    querystring = q 
+    #{"regions":"us","oddsFormat":"decimal","markets":"h2h,spreads","dateFormat":"iso"}
+    #{"daysFrom":"3"}
+
+    headers = {
+	"X-RapidAPI-Key": "ddbdea0dd2msh35b83215516e554p167640jsn0792654add12",
+	"X-RapidAPI-Host": "odds.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=q)
+
+    data = response.json()
+
     return data
 
 '''
@@ -101,6 +119,23 @@ def getcurrteams():
     }
 
     response = requests.get(url, headers=headers, params=querystring)
+
+    data = response.json()
+
+    return data
+
+
+def getlogos():
+
+    url = "https://api-nba-v1.p.rapidapi.com/teams"
+
+    headers = {
+	"content-type": "application/octet-stream",
+	"X-RapidAPI-Key": "1140719bf0mshb79f4957c134d32p181b91jsna45ef7333ea5",
+	"X-RapidAPI-Host": "api-nba-v1.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers)
 
     data = response.json()
 

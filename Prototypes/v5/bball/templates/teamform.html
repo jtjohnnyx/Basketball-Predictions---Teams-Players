@@ -17,6 +17,9 @@
 
 <ul>
     {% if team != None %}
+      <p>&nbsp;</p>
+      <img src = "{{ team.logo }}" width="218" height="218" style ="border: 5px solid black">
+      <p>&nbsp;</p>
       <li>Season: {{ year }}</li>
       <li>Team: {{ team.name }}</li>
       <li>Conference: {{ team.conf }}</li>
@@ -27,7 +30,7 @@
       <li>Opponent Points: {{ team.opts }}</li>
 
       {% if team.season == "2023" %}
-        <h4><a href="{% url 'roster' team.teamid %}">Roster</a></h4>
+        <h4><a href="{% url 'roster' team.teamid pageid %}">Roster</a></h4>
       {% endif %}
     {% endif %}
     {% if found == False %}

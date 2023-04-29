@@ -11,6 +11,8 @@ class Teams(models.Model):
     pts = models.fields.CharField(max_length=10)
     opts = models.fields.CharField(max_length=10, default = "0")
     conf = models.fields.CharField(max_length=100, default = "0")
+    logo = models.fields.CharField(max_length=100, default = "None")
+    code = models.fields.CharField(max_length=10, default = "None")
 
 
 class Players(models.Model):
@@ -28,6 +30,7 @@ class upcGames(models.Model):
     home = models.fields.CharField(max_length=100)
     away = models.fields.CharField(max_length=100)
     gameid = models.fields.IntegerField()
+    odds = models.fields.CharField(max_length=100, default = "None") 
 
 
 class pastGames(models.Model):

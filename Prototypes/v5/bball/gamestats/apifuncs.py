@@ -55,12 +55,20 @@ def find_player_info(dict,key):
     else:
         return [None]'''
     
-
+'''
+deprecated
 def find_upcgames(list):
     games = []
     for i in range(len(list)):
         if list[i]['completed'] == False:
             games += [[list[i]['home_team'], list[i]['away_team'], list[i]['commence_time']]]
+            #games += [[list[i]['home_team'], list[i]['away_team'], list[i]['commence_time'], int(list[i]['scores'][0]['score']), int(list[i]['scores'][1]['score'])]]
+    return games'''
+
+def find_upcgames(list):
+    games = []
+    for i in range(len(list)):
+        games += [[list[i]['home_team'], list[i]['away_team'], list[i]['commence_time'], str(list[i]['bookmakers'][0]['markets'][0]['outcomes'][0]['price']), str(list[i]['bookmakers'][0]['markets'][0]['outcomes'][1]['price'])]]
             #games += [[list[i]['home_team'], list[i]['away_team'], list[i]['commence_time'], int(list[i]['scores'][0]['score']), int(list[i]['scores'][1]['score'])]]
     return games
 
@@ -84,7 +92,7 @@ def find_past_teams(dict):
 def find_curr_teams(dict):
     teams = []
     for team in dict['body']:
-        teams += [[team['teamCity'] + ' ' + team['teamName'], team['ppg'], team['teamID'], team['wins'], team['loss'], team['conference'], team['oppg']]]
+        teams += [[team['teamCity'] + ' ' + team['teamName'], team['ppg'], team['teamID'], team['wins'], team['loss'], team['conference'], team['oppg'], team['teamAbv']]]
 
     return teams
 
@@ -94,3 +102,10 @@ def find_all_players(dict, index):
         players += [[dict['body'][index]['Roster'][player]['longName'], dict['body'][index]['Roster'][player]['teamID'], dict['body'][index]['Roster'][player]['nbaComHeadshot'], dict['body'][index]['Roster'][player]['playerID'], dict['body'][index]['Roster'][player]['bDay'], dict['body'][index]['Roster'][player]['height']]]
     
     return players
+
+def find_logo(dict, name):
+    for i in range(len(dict['response'])):
+        if dict['response'][i]['name'] == name:
+            logo = dict['response'][i]['logo']
+            break
+    return logo

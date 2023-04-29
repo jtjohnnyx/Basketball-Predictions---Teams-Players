@@ -17,13 +17,16 @@
 
 <ul>
     {% if player != None %}
+      <p> &nbsp;</p>
+      <a href="{% url 'team' team.teamid %}">
+        <img src="{{ team.logo }}" alt = "{{ team.name }}" width="218" height="218" style ="border: 5px solid black">
+      </a>
+      <img src = "{{ player.pic }}" width="218" height="218" style ="border: 5px solid black">
+      <p> &nbsp;</p>
       <li>Name: {{ player.name }}</li>
-      <li>Team: {{ team.name }} {{ team.season }} Season</li>
+      <li>Team: {{ team.name }} | {{ team.season }} Season</li>
       <li>Age: {{ player.age }}</li>
       <li>Height: {{ player.height }}</li>
-      <p> &nbsp;&nbsp;</p>
-      <img src = "{{ player.pic }}" width="218" height="218" style ="border: 5px solid black">
-      
     {% endif %}
     {% if found == False %}
       <h3> No information available for this player.</h3>

@@ -1,0 +1,36 @@
+{% load convstr %}
+<h3><a href="/bball/">Get Back to home page</a></h3>
+
+<h3>Select the conference and season below:</h3>
+
+<form action="" method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+{% if teams != None %}
+    <table border = "1" cellpadding = "5" cellspacing = "5" width = "600" height = "150">
+        <caption><h3>{{conf}} Season {{season}}</h3></caption>
+        <tr>
+            <th>Rank</th>     
+            <th>Team</th>
+            <th>Wins</th>
+            <th>Losses</th>
+            <th>PCT</th>
+        </tr>
+        {% for team in teams %}
+        <tr>
+            <th>{{ forloop.counter }}</td>
+            <td>{{team.name}}</td>
+            <td>{{team.wins}}</td>
+            <td>{{team.losses}}</td>
+            <td>{{team|pct}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+ {% endif %}
+
+{% if found == False %}
+<h3> No information available.</h3>
+{% endif %}

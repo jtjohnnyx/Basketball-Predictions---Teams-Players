@@ -29,10 +29,10 @@
     </tr>
     <tr>
         <th>Losses</td>
-        {% if pteam1.losses < pteam2.losses %}
+        {% if pteam1.losses|conv < pteam2.losses|conv %}
             <td bgcolor = #90EE90>{{pteam1.losses}}</td>
             <td>{{pteam2.losses}}</td>
-        {% elif pteam1.losses == pteam2.losses %}
+        {% elif pteam1.losses|conv == pteam2.losses|conv %}
             <td bgcolor = #F1EB9C>{{pteam1.losses}}</td>
             <td bgcolor = #F1EB9C>{{pteam2.losses}}</td>
         {% else %}
@@ -42,10 +42,10 @@
     </tr>
     <tr>
         <th>PTS</td>
-        {% if pteam1.pts > pteam2.pts %}
+        {% if pteam1.pts|conv > pteam2.pts|conv %}
             <td bgcolor = #90EE90>{{pteam1.pts}}</td>
             <td>{{pteam2.pts}}</td>
-        {% elif pteam1.pts == pteam2.pts %}
+        {% elif pteam1.pts|conv == pteam2.pts|conv %}
             <td bgcolor = #F1EB9C>{{pteam1.pts}}</td>
             <td bgcolor = #F1EB9C>{{pteam2.pts}}</td>
         {% else %}
@@ -55,10 +55,10 @@
      </tr>
      <tr>
         <th>OPTS</td>
-        {% if pteam1.opts < pteam2.opts %}
+        {% if pteam1.opts|conv < pteam2.opts|conv %}
             <td bgcolor = #90EE90>{{pteam1.opts}}</td>
             <td>{{pteam2.opts}}</td>
-        {% elif pteam1.opts == pteam2.opts %}
+        {% elif pteam1.opts|conv == pteam2.opts|conv %}
             <td bgcolor = #F1EB9C>{{pteam1.opts}}</td>
             <td bgcolor = #F1EB9C>{{pteam2.opts}}</td>
         {% else %}
@@ -80,10 +80,10 @@
     </tr>
     <tr>
         <th>Wins</td>
-        {% if team1.wins > team2.wins %}
+        {% if team1.wins|conv > team2.wins|conv %}
             <td bgcolor = #90EE90>{{team1.wins}}</td>
             <td>{{team2.wins}}</td>
-        {% elif team1.wins == team2.wins %}
+        {% elif team1.wins|conv == team2.wins|conv %}
             <td bgcolor = #F1EB9C>{{team1.wins}}</td>
             <td bgcolor = #F1EB9C>{{team2.wins}}</td>
         {% else %}
@@ -93,10 +93,10 @@
     </tr>
     <tr>
         <th>Losses</td>
-        {% if team1.losses < team2.losses %}
+        {% if team1.losses|conv < team2.losses|conv %}
             <td bgcolor = #90EE90>{{team1.losses}}</td>
             <td>{{team2.losses}}</td>
-        {% elif team1.losses == team2.losses %}
+        {% elif team1.losses|conv == team2.losses|conv %}
             <td bgcolor = #F1EB9C>{{team1.losses}}</td>
             <td bgcolor = #F1EB9C>{{team2.losses}}</td>
         {% else %}
@@ -106,10 +106,10 @@
     </tr>
     <tr>
         <th>PTS</td>
-        {% if team1.pts > team2.pts %}
+        {% if team1.pts|conv > team2.pts|conv %}
             <td bgcolor = #90EE90>{{team1.pts}}</td>
             <td>{{team2.pts}}</td>
-        {% elif team1.pts == team2.pts %}
+        {% elif team1.pts|conv == team2.pts|conv %}
             <td bgcolor = #F1EB9C>{{team1.pts}}</td>
             <td bgcolor = #F1EB9C>{{team2.pts}}</td>
         {% else %}
@@ -119,10 +119,10 @@
      </tr>
      <tr>
         <th>OPTS</td>
-        {% if team1.opts < team2.opts %}
+        {% if team1.opts|conv < team2.opts|conv %}
             <td bgcolor = #90EE90>{{team1.opts}}</td>
             <td>{{team2.opts}}</td>
-        {% elif team1.opts == team2.opts %}
+        {% elif team1.opts|conv == team2.opts|conv %}
             <td bgcolor = #F1EB9C>{{team1.opts}}</td>
             <td bgcolor = #F1EB9C>{{team2.opts}}</td>
         {% else %}
@@ -132,5 +132,27 @@
      </tr>
  </table>
  {% endif %}
+ <p> &nbsp;&nbsp;</p>
 
+ <table border = "1" cellpadding = "5" cellspacing = "5" width = "600" height = "150">
+    <caption><h3>Who will win?</h3></caption>
+    <tr>
+       <th></th>
+       <th>{{team1.name}}</th>
+       <th>{{team2.name}}</th>
+    </tr>
+    <tr>
+        <th>Aggregate Odds</td>
+        {% if odds1|conv < odds2|conv %}
+            <td bgcolor = #90EE90>{{odds1}}</td>
+            <td>{{odds2}}</td>
+        {% elif odds1|conv == odds2|conv %}
+            <td bgcolor = #F1EB9C>{{odds1}}</td>
+            <td bgcolor = #F1EB9C>{{odds2}}</td>
+        {% else %}
+            <td>{{odds1}}</td>
+            <td bgcolor = #90EE90>{{odds2}}</td>
+        {% endif %}
+    </tr>
+ </table>
  

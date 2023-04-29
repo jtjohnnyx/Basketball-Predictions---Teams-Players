@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from gamestats.forms import TeamForm, PlayerForm
+from gamestats.forms import TeamForm, PlayerForm, StandingForm
 from gamestats import cache
 from .models import Teams, upcGames, pastGames, Players
 
@@ -28,14 +28,22 @@ def team_info(request):
   else:
   # this must be a GET request, so create an empty form
     form = TeamForm()
-    #Teams.objects.all().delete()
-    #for i in range(2022, 2020, -1):
-    #  cache.cache_pastteams(str(i))
+    #Teams.objects.filter(season = "2022").all().delete()
+    #Teams.objects.filter(season = "2021").all().delete()
     #cache.cache_currteams()
-   
+    #for i in range(2022, 2020, -1):
+    # cache.cache_pastteams(str(i))
+
   return render(request,
          'teamform.html',
          {'form': form, 'team': info, 'year': year,'found': found, 'pageid': 1})
+
+
+def team(request, teamid):
+  team = Teams.objects.filter(season = "2023").filter(teamid = teamid).first()
+  return render(request,
+         'team.html',
+         {'team': team})
 
 
 def player_info(request):
@@ -77,25 +85,27 @@ def player_info(request):
          {'form': form, 'player': info, 'team': team, 'found': found, 'pageid': 2})
 
 
-def player(request, teamid, playerid):
+def player(request, teamid, playerid, pageid):
   player = Players.objects.filter(playerid = playerid).first()
   team = Teams.objects.filter(teamid = teamid).first() 
   return render(request,
          'player.html',
-         {'team': team, 'player': player})
+         {'team': team, 'player': player, 'pageid': pageid})
 
 def aboutpage(request):
     return render(request, 'about.html')
 
-def roster(request, id):
-  team = Teams.objects.filter(teamid = id).first()
-  players = cache.get_players(teamid = id)
+def roster(request, teamid, pageid):
+  team = Teams.objects.filter(teamid = teamid).first()
+  players = cache.get_players(teamid = teamid)
+
   return render(request,
          'roster.html',
-         {'players': players, 'team': team})
+         {'players': players, 'team': team, 'pageid': pageid})
+
 
 def pastgames(request):
-  '''  
+  '''
   avail = cache.pastgames_avail()
   print("Cache:", avail)
   if avail == False:
@@ -103,12 +113,13 @@ def pastgames(request):
     cache.cache_pastgames()
   else:
     print("got from cache")'''
-  games = pastGames.objects.all()
+  games = pastGames.objects.order_by("-gameid")
+
   return render(request, 'pastgames.html', {'games': games, 'pageid': 3})
 
 
 def upcgames(request):
-  '''  
+  '''
   avail = cache.upcgames_avail()
   print("Cache:", avail)
   if avail == False:
@@ -124,9 +135,42 @@ def upcgames(request):
 def compare(request, id):
   '''NOT FINISHED'''
   game = upcGames.objects.filter(gameid = id).first()
+  odds = game.odds.split(' ')
+  odds1 = odds[0]
+  odds2 = odds[1]
   team1 = Teams.objects.filter(season = "2023").filter(name = game.home).first()
   team2 = Teams.objects.filter(season = "2023").filter(name = game.away).first()
   pteam1 = Teams.objects.filter(season = "2022").filter(name = game.home).first()
   pteam2 = Teams.objects.filter(season = "2022").filter(name = game.away).first()
  
-  return render(request, 'comparison.html', {'id' : id, 'team1': team1, 'team2': team2, 'pteam1': pteam1, 'pteam2': pteam2})
+  return render(request, 'comparison.html', {'odds1' : odds1, 'odds2': odds2, 'team1': team1, 'team2': team2, 'pteam1': pteam1, 'pteam2': pteam2})
+
+
+def standings(request):
+
+  conf = None
+  year = None
+  found = True
+  teams = None
+
+  if request.method == 'POST': 
+      # create an instance of our form, and fill it with the POST data
+      form = StandingForm(request.POST)
+      #upcGames.objects.all().delete()
+
+      if form.is_valid():
+        #print(form.cleaned_data)
+        conf = form.cleaned_data['Conference']
+        year = form.cleaned_data['Season']
+
+        teams = Teams.objects.filter(season = year).filter(conf = conf).order_by('-wins','-losses', '-pts').all()
+
+        if teams == None:
+          found = False
+
+  else:
+  # this must be a GET request, so create an empty form
+    form = StandingForm()
+  
+  
+  return render(request, 'standingform.html', {'form': form, 'teams': teams, 'conf': conf, 'season': year, 'found': found})
