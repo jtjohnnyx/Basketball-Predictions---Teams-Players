@@ -2,7 +2,7 @@
 {% if pageid == 1 %}
     <h3><a href="/bball/team/">Go Back</a></h3>
 {% else %}
-    <h3><a href="{% url 'team' team.teamid %}">Go Back</a></h3>
+    <h3><a href="{% url 'team' team.teamid pageid %}">Go Back</a></h3>
 {% endif %}
 
 {% for player in players %}

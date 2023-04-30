@@ -3,7 +3,10 @@
 <h3><a href="/bball/upcoming-games/">Go back</a></h3>
 <p> &nbsp;&nbsp;</p>
 
-<!--NOT FINISHED!!!!</table>-->
+{% if team1 != None and team2 != None %}
+<h2>{{team1.name}} vs {{team2.name}}</h2>
+<p>&nbsp;</p>
+{% endif %}
 
 
 {% if pteam1 != None and pteam2 != None %}
@@ -132,6 +135,36 @@
      </tr>
  </table>
  {% endif %}
+ <p> &nbsp;&nbsp;</p>
+
+
+<table border = "1" cellpadding = "5" cellspacing = "5" width = "600" height = "150">
+    <caption><h3>Last 5 games</h3></caption>
+    <tr>
+       <th>{{team1.name}}</th>
+       <th>{{team2.name}}</th>
+    </tr>
+    {% for res1, res2, res3, res4 in results %}
+    <tr>
+        {% if res3 == 1 %}
+            <td bgcolor = #90EE90>{{ res1.home }} : {{ res1.homescore }}-{{ res1.awayscore }} : {{ res1.away }}</td>
+        {% elif res3 == 0 %}
+            <td bgcolor = #F1EB9C>{{ res1.home }} : {{ res1.homescore }}-{{ res1.awayscore }} : {{ res1.away }}</td>
+        {% else %}
+            <td bgcolor = #FFCCCB>{{ res1.home }} : {{ res1.homescore }}-{{ res1.awayscore }} : {{ res1.away }}</td>
+        {% endif %}
+
+        {% if res4 == 1 %}
+            <td bgcolor = #90EE90>{{ res2.home }} : {{ res2.homescore }}-{{ res2.awayscore }} : {{ res2.away }}</td>
+        {% elif res4 == 0 %}
+            <td bgcolor = #F1EB9C>{{ res2.home }} : {{ res2.homescore }}-{{ res2.awayscore }} : {{ res2.away }}</td>
+        {% else %}
+            <td bgcolor = #FFCCCB>{{ res2.home }} : {{ res2.homescore }}-{{ res2.awayscore }} : {{ res2.away }}</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+ </table>
+
  <p> &nbsp;&nbsp;</p>
 
  <table border = "1" cellpadding = "5" cellspacing = "5" width = "600" height = "150">

@@ -42,6 +42,17 @@ class pastGames(models.Model):
     awayscore = models.fields.IntegerField()
 
 
+class lastGames(models.Model):
+    name = models.fields.CharField(max_length=100)
+    teamid = models.fields.CharField(max_length=10)
+    time = models.fields.CharField(max_length=100)
+    home = models.fields.CharField(max_length=100)
+    away = models.fields.CharField(max_length=100)
+    gameid = models.fields.IntegerField()
+    homescore = models.fields.IntegerField()
+    awayscore = models.fields.IntegerField()
+
+
 class LastUpdate(models.Model):
     hour = models.fields.CharField(max_length=10)
     day = models.fields.CharField(max_length=10)

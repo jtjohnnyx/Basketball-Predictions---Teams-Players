@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from gamestats.forms import TeamForm, PlayerForm, StandingForm
 from gamestats import cache
-from .models import Teams, upcGames, pastGames, Players
+from .models import Teams, upcGames, pastGames, Players, lastGames, LastUpdate
 
 def display(request):
   return render(request, 'display.html')
@@ -39,11 +39,11 @@ def team_info(request):
          {'form': form, 'team': info, 'year': year,'found': found, 'pageid': 1})
 
 
-def team(request, teamid):
+def team(request, teamid, pageid):
   team = Teams.objects.filter(season = "2023").filter(teamid = teamid).first()
   return render(request,
          'team.html',
-         {'team': team})
+         {'team': team, 'pageid': pageid})
 
 
 def player_info(request):
@@ -71,6 +71,12 @@ def player_info(request):
   else:
   # this must be a GET request, so create an empty form
     form = PlayerForm()
+
+    #lastGames.objects.all().delete()
+    #for i in range(5):
+    #  teams = Teams.objects.filter(season = "2023").all()
+    #  for tm in teams:
+    #    lastGames.objects.create(name = tm.name, teamid = tm.teamid, home = "Home", away = "Away", time = "Time", homescore = -2, awayscore = -3, gameid = -1)
 
     #Teams.objects.all().delete()
     #Players.objects.all().delete()
@@ -105,28 +111,28 @@ def roster(request, teamid, pageid):
 
 
 def pastgames(request):
-  '''
+
   avail = cache.pastgames_avail()
   print("Cache:", avail)
   if avail == False:
     print("add to cache")
     cache.cache_pastgames()
   else:
-    print("got from cache")'''
+    print("got from cache")
   games = pastGames.objects.order_by("-gameid")
 
   return render(request, 'pastgames.html', {'games': games, 'pageid': 3})
 
 
 def upcgames(request):
-  '''
+  
   avail = cache.upcgames_avail()
   print("Cache:", avail)
   if avail == False:
     print("add to cache")
     cache.cache_upcgames()
   else:
-    print("got from cache")'''
+    print("got from cache")
   games = upcGames.objects.all()
 
   return render(request, 'upcgames.html', {'games': games, 'pageid': 4 })
@@ -138,12 +144,50 @@ def compare(request, id):
   odds = game.odds.split(' ')
   odds1 = odds[0]
   odds2 = odds[1]
+  lg1 = list(lastGames.objects.filter(name = game.home).all())
+  lg2 = list(lastGames.objects.filter(name = game.away).all())
+  l1 = []
+  l2 = []
+
+  for g1 in lg1:
+    if g1.name == g1.home:
+      if g1.homescore > g1.awayscore:
+        l1 += [1]
+      elif g1.homescore == g1.awayscore:
+        l1 += [0]
+      else:
+        l1 += [-1]
+    else:
+      if g1.homescore > g1.awayscore:
+        l1 += [-1]
+      elif g1.homescore == g1.awayscore:
+        l1 += [0]
+      else:
+        l1 += [1]
+
+  for g2 in lg2:
+    if g2.name == g2.home:
+      if g2.homescore > g2.awayscore:
+        l2 += [1]
+      elif g2.homescore == g2.awayscore:
+        l2 += [0]
+      else:
+        l2 += [-1]
+    else:
+      if g2.homescore > g2.awayscore:
+        l2 += [-1]
+      elif g2.homescore == g2.awayscore:
+        l2 += [0]
+      else:
+        l2 += [1]
+
+  results = zip(lg1, lg2, l1, l2)
   team1 = Teams.objects.filter(season = "2023").filter(name = game.home).first()
   team2 = Teams.objects.filter(season = "2023").filter(name = game.away).first()
   pteam1 = Teams.objects.filter(season = "2022").filter(name = game.home).first()
   pteam2 = Teams.objects.filter(season = "2022").filter(name = game.away).first()
  
-  return render(request, 'comparison.html', {'odds1' : odds1, 'odds2': odds2, 'team1': team1, 'team2': team2, 'pteam1': pteam1, 'pteam2': pteam2})
+  return render(request, 'comparison.html', {'odds1' : odds1, 'odds2': odds2, 'team1': team1, 'team2': team2, 'pteam1': pteam1, 'pteam2': pteam2, 'results': results})
 
 
 def standings(request):
@@ -173,4 +217,4 @@ def standings(request):
     form = StandingForm()
   
   
-  return render(request, 'standingform.html', {'form': form, 'teams': teams, 'conf': conf, 'season': year, 'found': found})
+  return render(request, 'standingform.html', {'form': form, 'teams': teams, 'conf': conf, 'season': year, 'found': found, 'pageid': 6})

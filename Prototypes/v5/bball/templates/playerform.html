@@ -1,9 +1,5 @@
-{% if pageid == 1 %}
-<h3><a href="/bball/player/">Get Player info</a></h3>
-{% elif pageid == 2 %}
-<h3><a href="/bball/team/">Get Team info</a></h3>
-{% endif %}
-<h3><a href="/bball/">Go back</a></h3>
+
+<h3><a href="/bball/">Get back to home page</a></h3>
 <!-- <h3><a href="/bball/odds/">Go find out love odds</a></h3> -->
 
 <h3>Select the player below:</h3>
@@ -18,7 +14,7 @@
 <ul>
     {% if player != None %}
       <p> &nbsp;</p>
-      <a href="{% url 'team' team.teamid %}">
+      <a href="{% url 'team' team.teamid pageid %}">
         <img src="{{ team.logo }}" alt = "{{ team.name }}" width="218" height="218" style ="border: 5px solid black">
       </a>
       <img src = "{{ player.pic }}" width="218" height="218" style ="border: 5px solid black">

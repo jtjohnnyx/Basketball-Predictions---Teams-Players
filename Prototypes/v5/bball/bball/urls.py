@@ -9,7 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('bball/', views.display),
     path('bball/team/', views.team_info),
-    path('bball/team/<str:teamid>/', views.team, name = 'team'),
+    path('bball/team/<str:teamid>/<int:pageid>/', views.team, name = 'team'),
     path('bball/roster/<str:teamid>/<int:pageid>/', views.roster, name = 'roster'),
     path('bball/player/', views.player_info),
     path('bball/player/<str:teamid>/<str:playerid>/<int:pageid>/', views.player, name = 'player'),

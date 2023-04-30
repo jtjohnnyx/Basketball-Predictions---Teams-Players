@@ -1,4 +1,9 @@
-<h4><a href="/bball/player/">Go Back</a></h4>
+
+{% if pageid == 2 %}
+    <h3><a href="/bball/player/">Go Back</a></h3>
+{% elif pageid == 6 %}
+    <h3><a href="/bball/standing/">Go Back</a></h3>
+{% endif %}
 
 <p>&nbsp;</p>
 <img src = "{{ team.logo }}" width="218" height="218" style ="border: 5px solid black">
@@ -11,4 +16,4 @@
 <h4>Average game stats:</h4>
 <li>Points: {{ team.pts }}</li>
 <li>Opponent Points: {{ team.opts }}</li>
-<h4><a href="{% url 'roster' team.teamid 5 %}">Roster</a></h4>
+<h4><a href="{% url 'roster' team.teamid pageid %}">Roster</a></h4>

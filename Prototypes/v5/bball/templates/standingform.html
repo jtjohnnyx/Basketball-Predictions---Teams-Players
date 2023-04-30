@@ -1,5 +1,5 @@
 {% load convstr %}
-<h3><a href="/bball/">Get Back to home page</a></h3>
+<h3><a href="/bball/">Get back to home page</a></h3>
 
 <h3>Select the conference and season below:</h3>
 
@@ -22,7 +22,7 @@
         {% for team in teams %}
         <tr>
             <th>{{ forloop.counter }}</td>
-            <td>{{team.name}}</td>
+            <td><a href="{% url 'team' team.teamid pageid %}">{{team.name}}</a></td>
             <td>{{team.wins}}</td>
             <td>{{team.losses}}</td>
             <td>{{team|pct}}</td>
