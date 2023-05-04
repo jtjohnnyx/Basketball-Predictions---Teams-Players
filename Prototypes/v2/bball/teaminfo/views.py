@@ -14,33 +14,30 @@ from teaminfo import apifuncs
 
 
 
+import requests
+import json
+from datetime import datetime
+
+
 def get_upcoming_games():
-    url = "https://api-nba-v1.p.rapidapi.com/games/date/"
-
-    headers = {
-	"X-RapidAPI-Key": "1140719bf0mshb79f4957c134d32p181b91jsna45ef7333ea5",
-	"X-RapidAPI-Host": "api-nba-v1.p.rapidapi.com"
-    }
-
-    # Get the date of the upcoming Monday
-    today = datetime.today()
-    monday = today + timedelta(days=-today.weekday(), weeks=1)
-
-    # Get the dates for the upcoming week
-    dates = []
-    for i in range(7):
-        date = monday + timedelta(days=i)
-        dates.append(date.strftime("%Y-%m-%d"))
+    url = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard'
+    params = {'limit': 5}
+    response = requests.get(url, params=params)
+    data = response.json()
 
     games = []
-    for date in dates:
-        params = {"date": date}
-        response = requests.request("GET", url, headers=headers, params=params)
-        if response.status_code == 200:
-            data = response.json()
-            games += data["api"]["games"]
+    for event in data['events']:
+        game_time = datetime.strptime(event['date'], '%Y-%m-%dT%H:%MZ')
+        game_timestamp = int(game_time.timestamp())
+        game_id = event['id']
+        home_team = event['competitions'][0]['competitors'][0]['team']['displayName']
+        home_score = event['competitions'][0]['competitors'][0]['score']
+        away_team = event['competitions'][0]['competitors'][1]['team']['displayName']
+        away_score = event['competitions'][0]['competitors'][1]['score']
+        games.append({'id': game_id, 'time': game_timestamp, 'home_team': home_team, 'home_score': home_score, 'away_team': away_team, 'away_score': away_score})
 
     return games
+
 
 def display(request):
     games = get_upcoming_games()

@@ -10,12 +10,14 @@
     <link rel="stylesheet" type="text/css" href="{% static 'teaminfo/styles.css' %}">
 </head>
 <body>
+
     <div class="banner">
         <h3><a href="/bball/">Home</a></h3>
         <h3><a href="/bball/team/">Team Stats</a></h3>
         <h3><a href="/bball/player/">Player Stats</a></h3>
         <h3><a href="/bball/about/">About</a></h3>
     </div>
+
     <h1>Live Games</h1>
 
     {% if result.live %}
@@ -30,15 +32,14 @@
 
     <h1>Upcoming Games</h1>
 
-    {% if result.upcoming %}
+    <div>
+      <p>Upcoming NBA Games</p>
       <ul>
-        {% for game in result.upcoming %}
-          <li>{{ game.home_team }} vs. {{ game.visitor_team }} - {{ game.game_date }}</li>
-        {% endfor %}
+          {% for game in games %}
+          <li>{{ game.home_team }} vs {{ game.away_team }} at {{ game.game_time }}</li>
+          {% endfor %}
       </ul>
-    {% else %}
-      <p>No upcoming games in the next week.</p>
-    {% endif %}
+  </div>
 
 </body>
 </html>
