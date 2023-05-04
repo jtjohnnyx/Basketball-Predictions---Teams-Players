@@ -1,15 +1,14 @@
 import requests
 
 def getdata(b,q):
-    url = "https://basketball-data.p.rapidapi.com/team/schedule"
-
-    querystring = {"teamId":"1442"}
+    url = "https://api-nba-v1.p.rapidapi.com/" + b
 
     headers = {
-        "X-RapidAPI-Key": "f8f4dc7431mshc9098903b1f983ep135e3ajsnb77bd5f6bc42",
-        "X-RapidAPI-Host": "basketball-data.p.rapidapi.com"
+	"X-RapidAPI-Key": "1140719bf0mshb79f4957c134d32p181b91jsna45ef7333ea5",
+	"X-RapidAPI-Host": "api-nba-v1.p.rapidapi.com"
     }
 
-    response = requests.request("GET", url, headers=headers, params=querystring)
+    response = requests.request("GET", url, headers=headers, params=q)
 
-    print(response.text)
+    bdata = response.json()
+    return bdata

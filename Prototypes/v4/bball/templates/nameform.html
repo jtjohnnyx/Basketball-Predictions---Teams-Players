@@ -1,0 +1,28 @@
+{% if id == 1 %}
+<h3><a href="/bball/player/">Get Player info</a></h3>
+{% elif id == 2 %}
+<h3><a href="/bball/team/">Get Team info</a></h3>
+{% endif %}
+<h3><a href="/bball/">Go back</a></h3>
+<!-- <h3><a href="/bball/odds/">Go find out love odds</a></h3> -->
+
+<h3>Enter the full name below:</h3>
+
+<form action="" method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+<ul>
+    {% if team != None %}
+      <li>Name: {{ team.name }}</li>
+      <li>Nickname: {{ team.nick }}</li>
+      <li>Abbreviation: {{ team.code }}</li>
+      <li>City: {{ team.city }}</li>
+      <li>Season record: {{ team.record }}</li>
+    {% elif found == 0 %}
+      <h4>No team found</h4>
+    {% endif %}
+</ul>
+

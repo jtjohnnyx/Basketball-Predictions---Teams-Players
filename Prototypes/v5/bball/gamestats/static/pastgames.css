@@ -1,0 +1,85 @@
+.page-title {
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    margin-top: 50px;
+    color: #333;
+  }
+  
+  .feature-list-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+  }
+  
+  .feature-list-box {
+    width: 300px;
+    height: 250px;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    transition: all 0.3s ease;
+  }
+  
+  .feature-list-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }
+  
+  .game-card {
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+  }
+  
+  .game-time {
+    color: #555;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .games-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    list-style: none; /* remove bullet points */
+}
+  
+  .team-names {
+    margin-top: 10px;
+  }
+  
+  .home-team,
+  .away-team {
+    font-size: 20px;
+  }
+  
+  .game-score {
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 20px 0;
+    padding: 10px;
+    width: 60%;
+  }
+  
+  .score {
+    text-align: center;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .feature-list-box {
+      width: 100%;
+      height: auto;
+    }
+  }

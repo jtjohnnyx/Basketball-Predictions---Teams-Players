@@ -1,0 +1,94 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basketball Project</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'about.css' %}">
+</head>
+<body>
+	<div class = "banner">
+		{% if user.is_authenticated %}
+		    <a href="/bball/team/">Team Info</a>
+		    <a href="/bball/player/">Player Info</a>
+		    <a href="/bball/standing/">NBA Standings</a>
+		    <a href="/bball/past-games/">Past Games</a>
+		    <a href="/bball/upcoming-games/">Upcoming Games</a>
+            <a href="/bball/about/">User's Guide</a>
+            <a href="/logout/">Logout</a>
+		{% else %}
+		    <a href="/">Login</a>
+		{% endif %}
+	</div>
+
+    <header class="page-title">Welcome to NBA Wizard!</header>
+
+    <div class="feature-list-container">
+        <div class="feature-list-box">
+            <h5>Get Team Info</h5>
+            <p>Select the team and the season you want to view and click submit</p>
+        </div>
+
+        <div class="feature-list-box">
+            <h5>Get Player Info</h5>
+            <p>Select the player you want to view and click submit</p>
+        </div>
+
+        <div class="feature-list-box">
+            <h5>NBA Standings</h5>
+            <p>Select the team and the season you want to view and click submit</p>
+        </div>
+
+        <div class="feature-list-box">
+            <h5>Past Games</h5>
+            <p>Automatically displays the most recent game played in descending order</p>
+        </div>
+
+        <div class="feature-list-box">
+            <h5>Upcoming Games</h5>
+            <p>View upcoming matchups, compare team stats and view odds</p>
+        </div>
+    </div>
+
+    <div>
+    <h2>Past Games</h2>
+    <p>&nbsp;</p>
+
+    <ul>
+        {% for game in games %}
+            <li>Time: {{ game.time }}</li>
+            <li>Home Team: {{ game.home }}</li>
+            <li>Away team: {{ game.away }}</li>
+            <li><h4>{{ game.home }} : {{ game.homescore }}-{{ game.awayscore }} : {{ game.away }}</h4></li>
+            <hr>
+            <p>&nbsp;</p>
+        {% endfor %}
+    </ul>
+    </div>
+
+    <div>
+        <h2>Upcoming Games</h2>
+        <p>&nbsp;</p>
+
+        <ul>
+            {% for game in games %}
+                <li>Time: {{ game.time }}</li>
+                <li>Home Team: {{ game.home }}</li>
+                <li>Away team: {{ game.away }}</li>
+            <!--<li>Home: {{ game.homescore }}</li>
+                <li>Away: {{ game.awayscore }}</li>-->
+                <h4><a href="{% url 'comparison' game.gameid %}">Compare</a></h4>
+                <hr>
+                <p>&nbsp;</p>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    
+</body>
+</html>
+

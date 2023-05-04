@@ -1,0 +1,21 @@
+<header>current live odds!</header>
+<h3><a href="/bball/">Get Back to home page</a></h3>
+
+
+<!--<ul>
+    {% for o in output %}
+      <li>{{ o }}</li>
+    {% for o2 in o %}
+        <li>{{o2}}</li>
+    {% endfor %} 
+    {% endfor %}
+</ul>-->
+
+
+<ul>
+    {% for o in output %}
+       {% for o2 in o %} 
+        <li>{{ o2 }}</li>
+    {% endfor %}
+    {% endfor %}
+</ul>

@@ -1,0 +1,19 @@
+
+{% if pageid == 2 %}
+    <h3><a href="/bball/player/">Go Back</a></h3>
+{% elif pageid == 6 %}
+    <h3><a href="/bball/standing/">Go Back</a></h3>
+{% endif %}
+
+<p>&nbsp;</p>
+<img src = "{{ team.logo }}" width="218" height="218" style ="border: 5px solid black">
+<p>&nbsp;</p>
+<li>Season: {{ team.season }}</li>
+<li>Team: {{ team.name }}</li>
+<li>Conference: {{ team.conf }}</li>
+<li>Wins: {{ team.wins }}</li>
+<li>Losses: {{ team.losses }}</li>
+<h4>Average game stats:</h4>
+<li>Points: {{ team.pts }}</li>
+<li>Opponent Points: {{ team.opts }}</li>
+<h4><a href="{% url 'roster' team.teamid pageid %}">Roster</a></h4>

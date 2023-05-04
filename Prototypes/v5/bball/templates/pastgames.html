@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basketball Project</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'pastgames.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'playerinfo.css' %}">
+</head>
+<body>
+    <div class = "banner">
+		{% if user.is_authenticated %}
+		    <a href="/bball/team/">Team Info</a>
+		    <a href="/bball/player/">Player Info</a>
+		    <a href="/bball/standing/">NBA Standings</a>
+		    <a href="/bball/past-games/">Past Games</a>
+		    <a href="/bball/upcoming-games/">Upcoming Games</a>
+            <a href="/bball/about/">User's Guide</a>
+            <a href="/logout/">Logout</a>
+		{% else %}
+		    <a href="/">Login</a>
+		{% endif %}
+	</div>
+    <button class="goback-btn"><a href="/bball/">Go back</a></button>
+    <h3>Past Games</h3>
+<p>&nbsp;</p>
+
+<ul class="games-list">
+    {% for game in games %}
+    <li class="game-card">
+        <h2 class="game-time">{{ game.time }}</h2>
+        <div class="team-names">
+        </div>
+        <div class="score">
+            <h4>{{ game.home }} : {{ game.homescore }}-{{ game.awayscore }} : {{ game.away }}</h4>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

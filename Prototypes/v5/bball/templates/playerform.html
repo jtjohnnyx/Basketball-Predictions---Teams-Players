@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basketball Project</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'playerinfo.css' %}">
+</head>
+<body>
+	<div class = "banner">
+		  {% if user.is_authenticated %}
+		    <a href="/bball/team/">Team Info</a>
+		    <a href="/bball/player/">Player Info</a>
+		    <a href="/bball/standing/">NBA Standings</a>
+		    <a href="/bball/past-games/">Past Games</a>
+		    <a href="/bball/upcoming-games/">Upcoming Games</a>
+        <a href="/bball/about/">User's Guide</a>
+        <a href="/logout/">Logout</a>
+		{% else %}
+		    <a href="/">Login</a>
+		{% endif %}
+	</div>
+  <button class="goback-btn"><a href="/bball/">Go back</a></button>
+  <!-- <h3><a href="/bball/odds/">Go find out love odds</a></h3> -->
+
+  <h4>**For current season only**</h4>
+  <h3>Select the player below</h3>
+
+  <div class="form-container">
+    <form action="" method="post" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Submit">
+  </form>
+  </div>
+
+  <ul>
+      {% if player != None %}
+        <p> &nbsp;</p>
+        <a href="{% url 'team' team.teamid pageid %}">
+          <img src="{{ team.logo }}" alt = "{{ team.name }}" width="218" height="218" style ="border: 5px solid black">
+        </a>
+        <img src = "{{ player.pic }}" width="218" height="218" style ="border: 5px solid black">
+        <p> &nbsp;</p>
+        <li>Name: {{ player.name }}</li>
+        <li>Team: {{ team.name }} | {{ team.season }} Season</li>
+        <li>Age: {{ player.age }}</li>
+        <li>Height: {{ player.height }}</li>
+      {% endif %}
+      {% if found == False %}
+        <h3> No information available for this player.</h3>
+      {% endif %}
+  </ul>
+</body>
+</html>
