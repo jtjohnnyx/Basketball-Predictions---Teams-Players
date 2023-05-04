@@ -53,41 +53,6 @@
             <p>View upcoming matchups, compare team stats and view odds</p>
         </div>
     </div>
-
-    <div>
-    <h2>Past Games</h2>
-    <p>&nbsp;</p>
-
-    <ul>
-        {% for game in games %}
-            <li>Time: {{ game.time }}</li>
-            <li>Home Team: {{ game.home }}</li>
-            <li>Away team: {{ game.away }}</li>
-            <li><h4>{{ game.home }} : {{ game.homescore }}-{{ game.awayscore }} : {{ game.away }}</h4></li>
-            <hr>
-            <p>&nbsp;</p>
-        {% endfor %}
-    </ul>
-    </div>
-
-    <div>
-        <h2>Upcoming Games</h2>
-        <p>&nbsp;</p>
-
-        <ul>
-            {% for game in games %}
-                <li>Time: {{ game.time }}</li>
-                <li>Home Team: {{ game.home }}</li>
-                <li>Away team: {{ game.away }}</li>
-            <!--<li>Home: {{ game.homescore }}</li>
-                <li>Away: {{ game.awayscore }}</li>-->
-                <h4><a href="{% url 'comparison' game.gameid %}">Compare</a></h4>
-                <hr>
-                <p>&nbsp;</p>
-            {% endfor %}
-        </ul>
-    </div>
-    
     
 </body>
 </html>
