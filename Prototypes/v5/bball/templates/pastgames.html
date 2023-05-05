@@ -31,12 +31,10 @@
 
 <ul class="games-list">
     {% for game in games %}
-    <li class="game-card">
-        <h2 class="game-time">{{ game.time }}</h2>
-        <div class="team-names">
-        </div>
+    <li class="games-list">
+        <li>{{ game.time }}</li>
         <div class="score">
-            <h4>{{ game.home }} : {{ game.homescore }}-{{ game.awayscore }} : {{ game.away }}</h4>
+            <li>{{ game.home }} : {{ game.homescore }}-{{ game.awayscore }} : {{ game.away }}</li>
         </div>
     </li>
     {% endfor %}

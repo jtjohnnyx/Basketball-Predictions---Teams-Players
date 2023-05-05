@@ -40,8 +40,8 @@
   </form>
 </div>
 
-<div class="result-container">
-  <ul>
+<div>
+  <ul class = "games-list">
     {% if team != None %}
       <li class="team-logo"><img src="{{ team.logo }}" width="200" height="200" alt="team-logo"></li>
       <li class="team-info"><h2>{{ team.name }}</h2></li>
@@ -50,8 +50,8 @@
       <li class="team-info">Losses: {{ team.losses }}</li>
       <li class="team-info">Season: {{ year }}</li>
       <li class="team-stats">Average game stats:</li>
-      <li class="team-stats">Points: {{ team.pts }}</li>
-      <li class="team-stats">Opponent Points: {{ team.opts }}</li>
+      <li><h5>Points: {{ team.pts }}</h5></li>
+      <li><h5>Opponent Points: {{ team.opts }}</h5></li>
       
       {% if team.season == "2023" %}
         <li class="team-roster"><a href="{% url 'roster' team.teamid pageid %}">Roster</a></li>

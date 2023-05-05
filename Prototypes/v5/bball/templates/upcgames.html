@@ -5,9 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Basketball Project</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'team.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'pastgames.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'playerinfo.css' %}">
 </head>
 <body>
     <div class = "banner">
@@ -24,12 +27,12 @@
 		{% endif %}
 	</div>
     <button class="goback-btn"><a href="/bball/">Go back</a></button>
-    <h2>Upcoming Games</h2>
+    <h3>Upcoming Games</h3>
     <p>&nbsp;</p>
 
-    <ul>
+    <ul class="games-list">
         {% for game in games %}
-            <li>Time: {{ game.time }}</li>
+            <li>Time: {{ game.time }} </li>
             <li>Home Team: {{ game.home }}</li>
             <li>Away team: {{ game.away }}</li>
         <!--<li>Home: {{ game.homescore }}</li>

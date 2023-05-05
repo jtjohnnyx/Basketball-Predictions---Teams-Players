@@ -1,19 +1,30 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'team.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'display.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'pastgames.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'playerinfo.css' %}">
 
 {% if pageid == 2 %}
-    <h3><a href="/bball/player/">Go Back</a></h3>
+    <button class="goback-btn"><a href="/bball/player/">Go back</a></button>
 {% elif pageid == 6 %}
-    <h3><a href="/bball/standing/">Go Back</a></h3>
+    <button class="goback-btn"><a href="/bball/standing/">Go back</a></button>
 {% endif %}
 
 <p>&nbsp;</p>
 <img src = "{{ team.logo }}" width="218" height="218" style ="border: 5px solid black">
 <p>&nbsp;</p>
-<li>Season: {{ team.season }}</li>
-<li>Team: {{ team.name }}</li>
-<li>Conference: {{ team.conf }}</li>
-<li>Wins: {{ team.wins }}</li>
-<li>Losses: {{ team.losses }}</li>
-<h4>Average game stats:</h4>
-<li>Points: {{ team.pts }}</li>
-<li>Opponent Points: {{ team.opts }}</li>
-<h4><a href="{% url 'roster' team.teamid pageid %}">Roster</a></h4>
+
+<ul class="games-list">
+    <li>Season: {{ team.season }}</li>
+    <li>Team: {{ team.name }}</li>
+    <li>Conference: {{ team.conf }}</li>
+    <li>Wins: {{ team.wins }}</li>
+    <li>Losses: {{ team.losses }}</li>
+    <h4>Average game stats:</h4>
+    <li>Points: {{ team.pts }}</li>
+    <li>Opponent Points: {{ team.opts }}</li>
+    <h4><a href="{% url 'roster' team.teamid pageid %}">Roster</a></h4>
+</ul>
