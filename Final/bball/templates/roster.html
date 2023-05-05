@@ -1,0 +1,13 @@
+<body style="background-color:white;">
+{% if pageid == 1 %}
+    <h3><a href="/bball/team/">Go Back</a></h3>
+{% else %}
+    <h3><a href="{% url 'team' team.teamid pageid %}">Go Back</a></h3>
+{% endif %}
+
+{% for player in players %}
+    <a href="{% url 'player' team.teamid player.playerid pageid %}">
+    <img src="{{ player.pic }}" alt = "{{ player.name }}" width="218" height="218" style ="border: 5px solid black">
+    </a>
+{% endfor %}
+</body>

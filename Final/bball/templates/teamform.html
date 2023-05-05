@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basketball Project</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'display.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'about.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'teaminfo.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'playerinfo.css' %}">
+</head>
+<body>
+	<div class = "banner">
+		{% if user.is_authenticated %}
+		    <a href="/bball/team/">Team Info</a>
+		    <a href="/bball/player/">Player Info</a>
+		    <a href="/bball/standing/">NBA Standings</a>
+		    <a href="/bball/past-games/">Past Games</a>
+		    <a href="/bball/upcoming-games/">Upcoming Games</a>
+        <a href="/bball/about/">User's Guide</a>
+        <a href="/logout/">Logout</a>
+		{% else %}
+		    <a href="/">Login</a>
+		{% endif %}
+	</div>
+  <button class="goback-btn"><a href="/bball/">Go back</a></button>
+  <!-- <h3><a href="/bball/odds/">Go find out love odds</a></h3> -->
+
+<p class="info-text">**Roster only available for current season**</p>
+<h3>Select the team and season below</h3>
+
+<div class="form-container">
+  <form action="" method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+<div>
+  <ul class = "games-list">
+    {% if team != None %}
+      <li class="team-logo"><img src="{{ team.logo }}" width="200" height="200" alt="team-logo"></li>
+      <li class="team-info"><h2>{{ team.name }}</h2></li>
+      <li class="team-info">{{ team.conf }}</li>
+      <li class="team-info">Wins: {{ team.wins }}</li>
+      <li class="team-info">Losses: {{ team.losses }}</li>
+      <li class="team-info">Season: {{ year }}</li>
+      <li class="team-stats">Average game stats:</li>
+      <li><h5>Points: {{ team.pts }}</h5></li>
+      <li><h5>Opponent Points: {{ team.opts }}</h5></li>
+      
+      {% if team.season == "2023" %}
+        <li class="team-roster"><a href="{% url 'roster' team.teamid pageid %}">Roster</a></li>
+      {% endif %}
+    {% endif %}
+    
+    {% if found == False %}
+      <h3>No information available for this season.</h3>
+    {% endif %}
+  </ul>
+</div>
+</body>
+</html>
+

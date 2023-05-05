@@ -1,0 +1,57 @@
+/* Result container styling */
+.result-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 32px auto;
+    max-width: 800px;
+    padding: 32px;
+  }
+  
+  /* Team logo styling */
+  .team-logo img {
+    display: block;
+    margin: 0 auto 16px auto;
+    max-width: 100%;
+  }
+  
+  /* Team info styling */
+  .team-info h2 {
+    color: #323232;
+    font-size: 32px;
+    margin: 0;
+  }
+  
+  .team-info {
+    color: #666666;
+    font-size: 18px;
+    margin: 8px 0;
+  }
+  
+  /* Team stats styling */
+  .team-stats {
+    color: #323232;
+    font-size: 24px;
+    margin: 16px 0 8px 0;
+  }
+  
+  /* Roster link styling */
+  .team-roster a {
+    background-color: #323232;
+    border-radius: 4px;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 18px;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .team-roster a:hover {
+    background-color: #555555;
+  }
+
+  ul {
+    list-style: none;
+  }

@@ -1,0 +1,39 @@
+/* Container styling */
+ul {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 32px auto;
+    max-width: 800px;
+    padding: 32px;
+  }
+  
+  /* Team logo styling */
+  a {
+    display: block;
+    margin: 0 auto 16px auto;
+    max-width: 100%;
+  }
+  
+  /* Player photo styling */
+  img {
+    display: block;
+    margin: 0 auto 16px auto;
+    max-width: 100%;
+  }
+  
+  /* Player info styling */
+  li {
+    color: #666666;
+    font-size: 18px;
+    margin: 8px 0;
+  }
+  
+  /* Heading styling */
+  h3 {
+    color: #323232;
+    font-size: 24px;
+    margin: 16px 0;
+    text-align: center;
+  }
+  
